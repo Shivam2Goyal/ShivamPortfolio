@@ -49,6 +49,13 @@ const Hero = () => {
       <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-primary-glow/30 rounded-full blur-xl animate-float" style={{ animationDelay: "1s" }} />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
+        {/* Profile Image Placeholder */}
+        <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-card border-2 border-primary/30 overflow-hidden animate-scale-in">
+          <div className="w-full h-full bg-muted/50 flex items-center justify-center text-muted-foreground">
+            <span className="text-4xl">👤</span>
+          </div>
+        </div>
+
         {/* Main heading */}
         <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
           <span className="block text-foreground">Hi, I'm</span>
