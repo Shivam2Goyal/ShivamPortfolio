@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Calendar, TrendingUp } from "lucide-react";
+import { Github, ExternalLink, Calendar, TrendingUp, Filter } from "lucide-react";
 
 const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All Projects");
+  const [showAll, setShowAll] = useState(false);
+
   const projects = [
     {
       title: "Project Raseed",
@@ -11,7 +15,8 @@ const Projects = () => {
       description: "AI-first receipt intelligence engine combining Google Wallet integration with Gemini AI for smart expense tracking and financial insights.",
       technologies: ["Gemini AI", "Google Wallet API", "Python", "React", "Firebase"],
       status: "In Development",
-      highlight: "AI-First Intelligence"
+      highlight: "AI-First Intelligence",
+      category: "Machine Learning"
     },
     {
       title: "SentimentSphere",
@@ -20,7 +25,8 @@ const Projects = () => {
       technologies: ["TensorFlow", "OpenCV", "BiLSTM", "Flask", "GloVe", "Haar Cascade"],
       metrics: "68% facial accuracy, 65% text accuracy",
       github: "#",
-      highlight: "Multimodal AI"
+      highlight: "Multimodal AI",
+      category: "Machine Learning"
     },
     {
       title: "ThreatHawk",
@@ -29,7 +35,8 @@ const Projects = () => {
       technologies: ["Scikit-learn", "XGBoost", "Random Forest", "SVM", "k-NN"],
       metrics: ">90% accuracy, AUC >0.90",
       github: "#",
-      highlight: "Cybersecurity ML"
+      highlight: "Cybersecurity ML",
+      category: "Machine Learning"
     },
     {
       title: "HyperTrie",
@@ -38,7 +45,8 @@ const Projects = () => {
       technologies: ["C++", "Python", "Flask", "JavaScript", "Chrome Extension API"],
       metrics: "95% faster than list-based search",
       github: "#",
-      highlight: "Data Structures"
+      highlight: "Data Structures",
+      category: "Algorithms"
     },
     {
       title: "GMM Image Segmentor",
@@ -47,19 +55,48 @@ const Projects = () => {
       technologies: ["Python", "NumPy", "OpenCV", "Scikit-image", "Matplotlib"],
       metrics: "Jaccard coefficient up to 0.917",
       github: "#",
-      highlight: "Computer Vision"
+      highlight: "Computer Vision",
+      category: "Coursework"
     }
   ];
 
+  const categories = ["All Projects", "Machine Learning", "Algorithms", "Android", "Frontend", "Backend", "Full Stack", "Coursework"];
+
+  const filteredProjects = selectedCategory === "All Projects" 
+    ? projects 
+    : projects.filter(project => project.category === selectedCategory);
+
+  const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 3);
+
   return (
-    <section id="projects" className="py-20 px-6">
+    <section id="projects" className="py-20 px-6 bg-muted/30">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gradient animate-fade-in">
-          Featured Projects
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gradient animate-fade-in font-playfair">
+          Projects
         </h2>
 
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedCategory(category)}
+              className={`transition-all duration-300 font-playfair ${
+                selectedCategory === category 
+                  ? "bg-primary text-primary-foreground" 
+                  : "border-primary/30 hover:border-primary hover:bg-primary/10"
+              }`}
+            >
+              <Filter className="h-4 w-4 mr-2" />
+              {category}
+            </Button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <Card 
               key={project.title}
               className="group bg-gradient-card border-border/50 backdrop-blur-sm card-hover overflow-hidden relative"
@@ -77,7 +114,7 @@ const Projects = () => {
 
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-2">
-                  <CardTitle className="text-xl font-bold text-primary group-hover:text-primary-glow transition-colors duration-300">
+                  <CardTitle className="text-xl font-bold text-primary group-hover:text-primary-glow transition-colors duration-300 font-playfair">
                     {project.title}
                   </CardTitle>
                 </div>
@@ -155,12 +192,25 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* View more projects */}
-        <div className="text-center mt-12">
+        {/* Show More/Less Button */}
+        {filteredProjects.length > 3 && (
+          <div className="text-center mt-8">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowAll(!showAll)}
+              className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 font-playfair"
+            >
+              {showAll ? "Show Less" : `Show All ${filteredProjects.length} Projects`}
+            </Button>
+          </div>
+        )}
+
+        {/* View GitHub */}
+        <div className="text-center mt-8">
           <Button 
             variant="outline" 
             size="lg"
-            className="border-primary/30 hover:border-primary hover:bg-primary/10 hover:scale-105 transition-all duration-300"
+            className="border-primary/30 hover:border-primary hover:bg-primary/10 hover:scale-105 transition-all duration-300 font-playfair"
             asChild
           >
             <a href="https://github.com/shivamgoyal" target="_blank" rel="noopener noreferrer">

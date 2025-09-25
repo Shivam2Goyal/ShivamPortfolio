@@ -1,109 +1,108 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, Code } from "lucide-react";
 
 const Contact = () => {
-  const contactMethods = [
+  const socialLinks = [
     {
-      icon: Mail,
-      label: "Email",
-      value: "b23cm1036@iitj.ac.in",
-      href: "mailto:b23cm1036@iitj.ac.in",
-      color: "primary"
+      icon: Linkedin,
+      href: "https://linkedin.com/in/shivamgoyal",
+      label: "LinkedIn",
+      color: "text-blue-500"
     },
     {
       icon: Github,
-      label: "GitHub",
-      value: "github.com/shivamgoyal",
       href: "https://github.com/shivamgoyal",
-      color: "accent"
+      label: "GitHub",
+      color: "text-gray-400"
     },
     {
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "linkedin.com/in/shivamgoyal",
-      href: "https://linkedin.com/in/shivamgoyal",
-      color: "primary"
+      icon: Instagram,
+      href: "https://instagram.com/shivamgoyal",
+      label: "Instagram",
+      color: "text-pink-500"
     },
     {
-      icon: MapPin,
-      label: "Location",
-      value: "IIT Jodhpur, Rajasthan",
-      href: "#",
-      color: "accent"
+      icon: Code,
+      href: "https://codeforces.com/profile/shivamgoyal",
+      label: "Codeforces",
+      color: "text-blue-400"
+    },
+    {
+      icon: Code,
+      href: "https://leetcode.com/shivamgoyal",
+      label: "LeetCode",
+      color: "text-yellow-500"
     }
   ];
 
   return (
     <section id="contact" className="py-20 px-6 bg-muted/30">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gradient animate-fade-in">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gradient animate-fade-in font-playfair">
           Let's Connect
         </h2>
 
-        <Card className="p-8 md:p-12 bg-gradient-card border-border/50 backdrop-blur-sm relative overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/10 rounded-full blur-2xl" />
+        <Card className="p-8 bg-gradient-card border-border/50 backdrop-blur-sm relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
+          <div className="absolute top-4 right-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
+          <div className="absolute bottom-4 left-4 w-24 h-24 bg-accent/10 rounded-full blur-xl" />
 
-          <div className="relative z-10">
-            <div className="text-center mb-12">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">
-                Ready to collaborate on something amazing?
-              </h3>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Whether you want to discuss AI research, explore innovative project ideas, 
-                or just have a conversation about the future of technology, I'd love to hear from you.
+          <div className="relative z-10 space-y-8">
+            <div className="space-y-4">
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                I'm always excited to connect with fellow developers, researchers, and creative minds. 
+                Whether you have a project idea, want to collaborate, or just want to chat about technology and innovation.
               </p>
             </div>
 
-            {/* Contact methods grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {contactMethods.map((method, index) => (
-                <Card
-                  key={method.label}
-                  className="p-6 bg-background/50 border-border/30 hover:border-primary/30 transition-all duration-300 group cursor-pointer"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                  onClick={() => method.href !== "#" && window.open(method.href, "_blank")}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`p-3 rounded-lg bg-${method.color}/10 group-hover:bg-${method.color}/20 transition-colors duration-300`}>
-                      <method.icon className={`h-5 w-5 text-${method.color}`} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                        {method.label}
-                      </h4>
-                      <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300 truncate">
-                        {method.value}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+            {/* Social Links */}
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold text-foreground font-playfair">Find me on</h3>
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                {socialLinks.map((link, index) => (
+                  <Button
+                    key={link.label}
+                    variant="outline"
+                    size="sm"
+                    className="group border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105 font-playfair"
+                    asChild
+                  >
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <link.icon className={`h-4 w-4 ${link.color} group-hover:scale-110 transition-transform duration-300`} />
+                      <span className="hidden sm:inline">{link.label}</span>
+                    </a>
+                  </Button>
+                ))}
+              </div>
             </div>
 
-            {/* Call to action */}
-            <div className="text-center">
+            {/* Email */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground font-playfair">Or drop me an email</h3>
+              
               <Button 
                 size="lg"
-                className="bg-gradient-hero hover:shadow-glow transition-all duration-300 hover:scale-105"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all duration-300 font-playfair"
                 asChild
               >
-                <a href="mailto:b23cm1036@iitj.ac.in">
-                  <Mail className="h-5 w-5 mr-2" />
-                  Get In Touch
+                <a href="mailto:b23cm1036@iitj.ac.in" className="flex items-center gap-2">
+                  <Mail className="h-5 w-5" />
+                  b23cm1036@iitj.ac.in
                 </a>
               </Button>
             </div>
 
-            {/* Footer note */}
-            <div className="mt-8 pt-8 border-t border-border/30 text-center">
+            <div className="pt-6 border-t border-border/30">
               <p className="text-sm text-muted-foreground">
-                Currently open to{" "}
-                <span className="text-primary font-medium">research collaborations</span>,{" "}
-                <span className="text-accent font-medium">internship opportunities</span>, and{" "}
-                <span className="text-primary font-medium">innovative project partnerships</span>
+                Open to collaborations, internships, research opportunities, and creative partnerships.
               </p>
             </div>
           </div>

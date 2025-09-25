@@ -16,8 +16,11 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { to: "/", label: "Home" },
-    { to: "/creative", label: "Beyond Tech" },
+    { href: "#about", label: "About Me" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#experience", label: "Experience" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
@@ -31,37 +34,30 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <NavLink
-            to="/"
-            className="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300"
+          <a
+            href="#"
+            className="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300 font-playfair"
           >
             Shivam Goyal
-          </NavLink>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `relative py-2 transition-colors duration-300 ${
-                    isActive
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`
-                }
+              <a
+                key={item.href}
+                href={item.href}
+                className="relative py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair"
               >
-                {({ isActive }) => (
-                  <>
-                    {item.label}
-                    {isActive && (
-                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-hero rounded-full" />
-                    )}
-                  </>
-                )}
-              </NavLink>
+                {item.label}
+              </a>
             ))}
+            <a
+              href="/creative"
+              className="px-4 py-2 bg-primary/10 text-primary border border-primary/30 rounded-lg hover:bg-primary/20 transition-all duration-300 font-playfair"
+            >
+              Beyond Tech
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,21 +76,22 @@ const Navbar = () => {
           <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border">
             <div className="px-6 py-4 space-y-3">
               {navItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `block py-2 transition-colors duration-300 ${
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`
-                  }
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="block py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
-                </NavLink>
+                </a>
               ))}
+              <a
+                href="/creative"
+                className="block py-2 text-primary font-playfair"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Beyond Tech
+              </a>
             </div>
           </div>
         )}
