@@ -42,22 +42,21 @@ const Navbar = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center justify-center space-x-8 flex-1">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="relative py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair"
+                className="relative py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair smooth-transition"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector(item.href);
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {item.label}
               </a>
             ))}
-            <a
-              href="/creative"
-              className="px-4 py-2 bg-primary/10 text-primary border border-primary/30 rounded-lg hover:bg-primary/20 transition-all duration-300 font-playfair"
-            >
-              Beyond Tech
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,18 +79,16 @@ const Navbar = () => {
                   key={item.href}
                   href={item.href}
                   className="block py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.querySelector(item.href);
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   {item.label}
                 </a>
               ))}
-              <a
-                href="/creative"
-                className="block py-2 text-primary font-playfair"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Beyond Tech
-              </a>
             </div>
           </div>
         )}
