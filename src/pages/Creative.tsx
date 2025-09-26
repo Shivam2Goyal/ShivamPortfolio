@@ -177,34 +177,6 @@ Humanity should always remain.`,
           <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-6 animate-fade-in">
             Creative Expression
           </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in" style={{animationDelay: '0.2s'}}>
-            Where technology meets artistry. Explore my creative journey through design, 
-            poetry, and the media that inspires my work.
-          </p>
-        </div>
-      </section>
-
-      {/* Quick Instructions */}
-      <section className="py-8 px-6">
-        <div className="max-w-4xl mx-auto">
-          <Card className="p-6 bg-muted/30 border-border/50">
-            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-              <Plus className="w-5 h-5 text-primary" />
-              How to Add Your Content
-            </h3>
-            <div className="grid md:grid-cols-3 gap-4 text-sm text-muted-foreground">
-              <div>
-                <strong className="text-foreground">Posters:</strong> Save images in <code className="bg-muted px-1 rounded">/public/posters/</code> 
-                and update image paths in the posterDesigns array
-              </div>
-              <div>
-                <strong className="text-foreground">Poetry:</strong> Add new poems to the poems array with title, content, and theme
-              </div>
-              <div>
-                <strong className="text-foreground">Media:</strong> Update URLs in mediaContent array to link to your videos/audio
-              </div>
-            </div>
-          </Card>
         </div>
       </section>
 

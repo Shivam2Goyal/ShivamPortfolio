@@ -5,35 +5,35 @@ import { Github, Linkedin, Instagram, Mail, Code } from "lucide-react";
 const Contact = () => {
   const socialLinks = [
     {
-      icon: Linkedin,
-      href: "https://linkedin.com/in/shivamgoyal",
+      icon: "public/icons/linkedin.svg",
+      href: "https://linkedin.com/in/shivam-goyal-85b63928a/",
       label: "LinkedIn",
-      color: "text-blue-500"
+      color: "text-blue-500",
     },
     {
       icon: Github,
-      href: "https://github.com/shivamgoyal",
+      href: "https://github.com/Shivam2Goyal",
       label: "GitHub",
-      color: "text-gray-400"
+      color: "text-gray-400",
     },
     {
       icon: Instagram,
-      href: "https://instagram.com/shivamgoyal",
+      href: "https://www.instagram.com/shivshiv_goyal/",
       label: "Instagram",
-      color: "text-pink-500"
+      color: "text-pink-500",
     },
     {
-      icon: Code,
-      href: "https://codeforces.com/profile/shivamgoyal",
+      icon: "public/icons/codeforces.svg",
+      href: "https://codeforces.com/profile/_sg_",
       label: "Codeforces",
-      color: "text-blue-400"
+      color: "text-blue-400",
     },
     {
-      icon: Code,
-      href: "https://leetcode.com/shivamgoyal",
+      icon: "public/icons/leetcode.svg",
+      href: "https://leetcode.com/u/_sg_-/",
       label: "LeetCode",
-      color: "text-yellow-500"
-    }
+      color: "text-yellow-500",
+    },
   ];
 
   return (
@@ -52,15 +52,19 @@ const Contact = () => {
           <div className="relative z-10 space-y-8">
             <div className="space-y-4">
               <p className="text-xl text-muted-foreground leading-relaxed">
-                I'm always excited to connect with fellow developers, researchers, and creative minds. 
-                Whether you have a project idea, want to collaborate, or just want to chat about technology and innovation.
+                I'm always excited to connect with fellow developers,
+                researchers, and creative minds. Whether you have a project
+                idea, want to collaborate, or just want to chat about technology
+                and innovation.
               </p>
             </div>
 
             {/* Social Links */}
             <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-foreground font-playfair">Find me on</h3>
-              
+              <h3 className="text-lg font-semibold text-foreground font-playfair">
+                Find me on
+              </h3>
+
               <div className="flex flex-wrap justify-center gap-4">
                 {socialLinks.map((link, index) => (
                   <Button
@@ -76,8 +80,18 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
                     >
-                      <link.icon className={`h-4 w-4 ${link.color} group-hover:scale-110 transition-transform duration-300`} />
-                      <span className="hidden sm:inline">{link.label}</span>
+                      {typeof link.icon === "string" ? (
+                        <img
+                          src={link.icon}
+                          alt={link.label}
+                          className="h-4 w-4"
+                        />
+                      ) : (
+                        <link.icon
+                          className={`h-4 w-4 ${link.color} group-hover:scale-110 transition-transform duration-300`}
+                        />
+                      )}
+                      <span className="sm:inline">{link.label}</span>
                     </a>
                   </Button>
                 ))}
@@ -86,14 +100,19 @@ const Contact = () => {
 
             {/* Email */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground font-playfair">Or drop me an email</h3>
-              
-              <Button 
+              <h3 className="text-lg font-semibold text-foreground font-playfair">
+                Or drop me an email
+              </h3>
+
+              <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 transition-all duration-300 font-playfair"
                 asChild
               >
-                <a href="mailto:b23cm1036@iitj.ac.in" className="flex items-center gap-2">
+                <a
+                  href="mailto:b23cm1036@iitj.ac.in"
+                  className="flex items-center gap-2"
+                >
                   <Mail className="h-5 w-5" />
                   b23cm1036@iitj.ac.in
                 </a>
@@ -102,7 +121,8 @@ const Contact = () => {
 
             <div className="pt-6 border-t border-border/30">
               <p className="text-sm text-muted-foreground">
-                Open to collaborations, internships, research opportunities, and creative partnerships.
+                Open to collaborations, internships, research opportunities, and
+                creative partnerships.
               </p>
             </div>
           </div>

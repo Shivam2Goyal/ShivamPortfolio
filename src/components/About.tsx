@@ -6,17 +6,17 @@ const About = () => {
   const socialLinks = [
     {
       icon: Github,
-      href: "https://github.com/shivamgoyal",
+      href: "https://github.com/Shivam2Goyal",
       label: "GitHub"
     },
     {
       icon: Linkedin,
-      href: "https://linkedin.com/in/shivamgoyal",
+      href: "https://www.linkedin.com/in/shivam-goyal-85b63928a/",
       label: "LinkedIn"
     },
     {
       icon: Instagram,
-      href: "https://instagram.com/shivamgoyal",
+      href: "https://www.instagram.com/shivshiv_goyal/",
       label: "Instagram"
     }
   ];
@@ -35,7 +35,7 @@ const About = () => {
               {/* Image placeholder */}
               <div className="w-full aspect-[3/4] bg-muted/50 rounded-lg mb-6 overflow-hidden border-2 border-primary/20">
                 <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                  <span className="text-6xl">👤</span>
+                  <span className="text-6xl"><img src="public\me.jpg" /></span>
                 </div>
               </div>
 
@@ -69,7 +69,7 @@ const About = () => {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-bold text-primary mb-4 font-playfair">
-                    Hi, I'm Shivam Goyal
+                    Hi, Shivam Here.
                   </h3>
                   <p className="text-muted-foreground leading-relaxed text-lg">
                     I'm Shivam, a curious builder at the intersection of AI, data, and design. 

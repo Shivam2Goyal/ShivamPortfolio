@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 /* Sophisticated Dark Portfolio Design System */
+html {
+  font-size: 18px; /* or any size you prefer */
+}
 
 @layer base {
   :root {
@@ -71,6 +74,9 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+    a:hover, button:hover, .hover\:text-foreground:hover {
+      color: hsl(var(--foreground)) !important;
+    }
   }
 
   /* Portfolio specific light mode (optional fallback) */
