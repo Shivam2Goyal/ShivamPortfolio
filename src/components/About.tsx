@@ -31,7 +31,7 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Profile Image */}
           <div className="lg:col-span-1 flex justify-center lg:justify-start">
-            <div className="relative">
+            <div className="relative lg:ml-20">
               {/* Main profile card */}
               <div className="bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md rounded-3xl p-6 border border-border/50 shadow-2xl">
                 {/* Profile Image */}
@@ -39,7 +39,7 @@ const About = () => {
                   <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                     <img 
                       src="/me.jpg" 
-                      alt="Gaurav's Profile" 
+                      alt="Shivam's Profile" 
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
@@ -78,20 +78,20 @@ const About = () => {
           <div className="lg:col-span-1 space-y-6">
             <div>
               <h3 className="text-4xl md:text-5xl font-bold mb-4">
-                Hi, <span className="text-cyan-400">Gaurav</span> Here.
+                Hi, <span className="text-cyan-400">Shivam</span> Here.
               </h3>
               <p className="text-xl text-muted-foreground mb-8">
-                And I'm working on my dreams :)
+                And I'm coding my dreams into reality :)
               </p>
             </div>
 
             <div className="space-y-6 text-lg text-muted-foreground">
               <p>
-                A graduate from the <span className="text-foreground font-medium">Indian Institute of Technology Jodhpur (IIT Jodhpur)</span>.
+                An Undergraduate from the <span className="text-foreground font-medium">Indian Institute of Technology Jodhpur (IIT Jodhpur)</span>.
               </p>
 
               <p>
-                <span className="text-foreground font-medium">Areas I love exploring:</span> software dev, algorithms, cybersecurity, Quant, and core hardware electronics.
+                <span className="text-foreground font-medium">Areas I love exploring:</span> Machine Learning, Artificial Intelligence, Data Science, Software dev and Algorithms.
               </p>
 
               <p>
@@ -99,7 +99,7 @@ const About = () => {
               </p>
 
               <p className="text-foreground font-medium">
-                Turning coffee into code and <span className="text-cyan-400">bugs into features</span> :) !!
+                Churning data into <span className="text-cyan-400">magic</span>, one clever line at a time :) !!
               </p>
 
               <p className="text-sm">

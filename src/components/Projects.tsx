@@ -100,7 +100,6 @@ const Projects = () => {
     "All Projects",
     "Machine Learning",
     "Algorithms",
-    "Android",
     "Frontend",
     "Backend",
     "Full Stack",
@@ -246,7 +245,7 @@ const Projects = () => {
             >
               {showAll
                 ? "Show Less"
-                : `Show All ${filteredProjects.length} Projects`}
+                : `Show More`}
             </Button>
           </div>
         )}
