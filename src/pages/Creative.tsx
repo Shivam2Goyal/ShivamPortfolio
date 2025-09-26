@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowLeft, ExternalLink, Eye, Plus, Palette, PenTool, Music, Video, Quote } from "lucide-react";
 
 const Creative = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedContent, setSelectedContent] = useState(null);
 
   // Poster designs - easy to add/remove
   const posterDesigns = [
@@ -154,7 +155,7 @@ Humanity should always remain.`,
   };
 
   return (
-    <div className="min-h-screen bg-background font-playfair">
+    <div className="min-h-screen bg-background font-bree-serif">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -208,35 +209,43 @@ Humanity should always remain.`,
                 {/* Poster Designs */}
                 {item.category === "poster" && 'tools' in item && (
                   <>
-                    <div className="aspect-[2/3] overflow-hidden relative group">
-                      <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                        <div className="text-center text-muted-foreground">
-                          <Palette className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                          <p className="text-sm font-medium">{item.title}</p>
-                          <p className="text-xs opacity-70">Replace with your poster</p>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="aspect-[2/3] overflow-hidden relative group cursor-pointer">
+                          <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                            <div className="text-center text-muted-foreground">
+                              <Palette className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                              <p className="text-sm font-medium">{item.title}</p>
+                              <p className="text-xs opacity-70">Replace with your poster</p>
+                            </div>
+                          </div>
+                          {/* Hover overlay */}
+                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <Button variant="secondary" size="sm">
+                              <Eye className="w-4 h-4 mr-2" />
+                              View Full Size
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <Button variant="secondary" size="sm">
-                          <Eye className="w-4 h-4 mr-2" />
-                          View Full Size
-                        </Button>
-                      </div>
-                    </div>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+                        <DialogHeader>
+                          <DialogTitle>{item.title}</DialogTitle>
+                        </DialogHeader>
+                        <div className="w-full flex justify-center">
+                          <div className="aspect-[2/3] max-h-[70vh] bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center rounded-lg">
+                            <div className="text-center text-muted-foreground">
+                              <Palette className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                              <p className="text-lg font-medium">{item.title}</p>
+                              <p className="text-sm opacity-70">Full size poster view</p>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                     <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                      <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {item.tools.map((tool) => (
-                          <Badge key={tool} variant="secondary" className="bg-primary/10 text-primary">{tool}</Badge>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {item.tags?.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
-                        ))}
-                      </div>
+                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm">{item.description}</p>
                     </div>
                   </>
                 )}
@@ -245,21 +254,31 @@ Humanity should always remain.`,
                 {item.category === "poetry" && 'content' in item && (
                   <div className="p-6 relative">
                     <Quote className="absolute top-4 right-4 w-6 h-6 text-accent/30" />
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-semibold text-primary">{item.title}</h3>
-                      <Badge variant="outline" className="text-xs">{item.theme}</Badge>
-                    </div>
+                    <h3 className="text-xl font-semibold text-primary mb-4">{item.title}</h3>
                     <div className="bg-muted/30 rounded-lg p-4 mb-4 relative">
-                      <p className="text-muted-foreground leading-relaxed whitespace-pre-line text-sm font-mono">
+                      <p className="text-muted-foreground leading-relaxed whitespace-pre-line text-sm font-mono line-clamp-6">
                         {item.content}
                       </p>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <Badge variant="secondary">{item.date}</Badge>
-                      <Button variant="ghost" size="sm" className="text-primary">
-                        <PenTool className="w-4 h-4 mr-2" />
-                        Read More
-                      </Button>
+                    <div className="flex justify-end">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-primary">
+                            <PenTool className="w-4 h-4 mr-2" />
+                            Read More
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl max-h-[90vh] overflow-auto">
+                          <DialogHeader>
+                            <DialogTitle className="text-2xl font-semibold text-primary">{item.title}</DialogTitle>
+                          </DialogHeader>
+                          <div className="bg-muted/30 rounded-lg p-6">
+                            <p className="text-foreground leading-relaxed whitespace-pre-line font-mono text-base">
+                              {item.content}
+                            </p>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </div>
                 )}
@@ -267,38 +286,57 @@ Humanity should always remain.`,
                 {/* Media Content */}
                 {(item.category === "video" || item.category === "audio") && 'url' in item && (
                   <>
-                    <div className="aspect-video overflow-hidden relative group">
-                      <div className="w-full h-full bg-gradient-to-br from-accent/10 to-primary/10 flex items-center justify-center">
-                        <div className="text-center text-muted-foreground">
-                          {item.category === "video" ? (
-                            <Video className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                          ) : (
-                            <Music className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                          )}
-                          <p className="text-sm font-medium">{item.title}</p>
-                          <p className="text-xs opacity-70">{item.duration}</p>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="aspect-video overflow-hidden relative group cursor-pointer">
+                          <div className="w-full h-full bg-gradient-to-br from-accent/10 to-primary/10 flex items-center justify-center">
+                            <div className="text-center text-muted-foreground">
+                              {item.category === "video" ? (
+                                <Video className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                              ) : (
+                                <Music className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                              )}
+                              <p className="text-sm font-medium">{item.title}</p>
+                              <p className="text-xs opacity-70">{item.duration}</p>
+                            </div>
+                          </div>
+                          {/* Play overlay */}
+                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <Button variant="secondary" size="sm">
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              {item.category === "video" ? "Watch" : "Listen"}
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      {/* Play overlay */}
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <Button variant="secondary" size="sm">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          {item.category === "video" ? "Watch" : "Listen"}
-                        </Button>
-                      </div>
-                    </div>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+                        <DialogHeader>
+                          <DialogTitle>{item.title}</DialogTitle>
+                        </DialogHeader>
+                        <div className="w-full flex justify-center">
+                          <div className="aspect-video w-full max-w-3xl bg-gradient-to-br from-accent/10 to-primary/10 flex items-center justify-center rounded-lg">
+                            <div className="text-center text-muted-foreground">
+                              {item.category === "video" ? (
+                                <Video className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                              ) : (
+                                <Music className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                              )}
+                              <p className="text-lg font-medium">{item.title}</p>
+                              <p className="text-sm opacity-70">Full screen {item.category} player</p>
+                              <Button variant="outline" className="mt-4" asChild>
+                                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="w-4 h-4 mr-2" />
+                                  Open External Link
+                                </a>
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                     <div className="p-6">
                       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
-                      <div className="flex items-center justify-between">
-                        <Badge variant="outline" className="text-xs">{item.duration}</Badge>
-                        <Button variant="outline" size="sm" asChild>
-                          <a href={item.url} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-4 h-4 mr-2" />
-                            Open
-                          </a>
-                        </Button>
-                      </div>
+                      <p className="text-muted-foreground text-sm">{item.description}</p>
                     </div>
                   </>
                 )}
