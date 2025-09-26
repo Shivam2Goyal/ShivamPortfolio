@@ -18,12 +18,7 @@ const AnimatedBackground = () => {
       <div className="absolute bottom-40 right-60 w-10 h-10 bg-emerald-400/35 rounded-full blur-md animate-float opacity-65 shadow-2xl shadow-emerald-400/25" style={{ animationDelay: '3.5s' }} />
       <div className="absolute top-60 right-40 w-9 h-9 bg-teal-300/45 rounded-full blur-md animate-float opacity-75 shadow-2xl shadow-teal-300/35" style={{ animationDelay: '5.5s' }} />
       <div className="absolute bottom-60 left-48 w-8 h-8 bg-cyan-300/40 rounded-full blur-md animate-float opacity-60 shadow-2xl shadow-cyan-300/30" style={{ animationDelay: '7.5s' }} />
-      
-      {/* Large fluorescent energy fields */}
-      <div className="absolute top-20 left-10 w-40 h-40 bg-cyan-400/20 rounded-full blur-2xl animate-float opacity-80 shadow-2xl shadow-cyan-400/15" />
-      <div className="absolute top-40 right-20 w-32 h-32 bg-emerald-400/25 rounded-full blur-2xl animate-float opacity-70 shadow-2xl shadow-emerald-400/20" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-32 left-1/4 w-48 h-48 bg-teal-300/15 rounded-full blur-3xl animate-float opacity-60 shadow-2xl shadow-teal-300/10" style={{ animationDelay: '4s' }} />
-      <div className="absolute bottom-20 right-1/3 w-36 h-36 bg-cyan-300/18 rounded-full blur-2xl animate-float opacity-50 shadow-2xl shadow-cyan-300/13" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-1/2 w-44 h-44 bg-emerald-400/16 rounded-full blur-3xl animate-float opacity-65 shadow-2xl shadow-emerald-400/11" style={{ animationDelay: '3s' }} />
-
+    </div>
+  );
+};
 export default AnimatedBackground;

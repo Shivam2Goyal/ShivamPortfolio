@@ -29,10 +29,6 @@ const Index = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-gradient mb-4">
                 Explore My Creative Side
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-                Discover my journey beyond technology - from poster designs and poetry 
-                to the videos, music, and creative works that inspire me.
-              </p>
               <a
                 href="/creative"
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary to-accent text-background rounded-lg hover:scale-105 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-glow"

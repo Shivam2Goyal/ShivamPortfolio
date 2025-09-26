@@ -8,27 +8,24 @@ const CoursesAchievements = () => {
     "Principles of Computer Systems", 
     "Pattern Recognition & ML",
     "Probability & Statistics",
-    "Signals and Systems",
-    "Database Management Systems",
-    "Operating Systems",
-    "Computer Networks"
+    "Signals and Systems"
   ];
 
   const achievements = [
     {
       title: "7th Rank @ Inter IIT Tech Meet 13.0",
       icon: Trophy,
-      description: "Team performance in technical competition"
+      description: "Team performance in Inter IIT Tech."
     },
     {
       title: "3rd Place @ Pitch Rush PM Hackathon",
       icon: Award,
-      description: "Product management and innovation"
+      description: "Product management."
     },
     {
-      title: "Finalist @ RowBoatics, IIT Bombay",
-      icon: Trophy,
-      description: "Technical innovation competition"
+      title: "AIR 124 @ NTST 2019",
+      icon: Award,
+      description: "Aptitude and reasoning olympiad."
     }
   ];
 
@@ -36,12 +33,12 @@ const CoursesAchievements = () => {
     {
       title: "UG Representative",
       icon: Users,
-      description: "Student body representation"
+      description: "Board of Co-Curricular Activities, IIT Jodhpur"
     },
     {
-      title: "Mentor, Product Club",
+      title: "Mentor, Robotics Society",
       icon: Users,
-      description: "Guiding product development initiatives"
+      description: "Guided juniors on robotics projects"
     },
     {
       title: "Associate, Product Club",
@@ -51,7 +48,7 @@ const CoursesAchievements = () => {
     {
       title: "Assistant Head @ Varchas'24",
       icon: Users,
-      description: "Event management and leadership"
+      description: "Digital Design Team Lead."
     }
   ];
 
@@ -59,7 +56,7 @@ const CoursesAchievements = () => {
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gradient animate-fade-in font-playfair">
-          Academic Excellence & Leadership
+          Academics & Positions of Responsibility
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -120,7 +117,7 @@ const CoursesAchievements = () => {
                 <div className="p-2 rounded-lg bg-primary/10">
                   <Users className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-primary font-playfair">Leadership Roles</h3>
+                <h3 className="text-xl font-bold text-primary font-playfair">Positions of Responsibility (POR)</h3>
               </div>
               
               <div className="space-y-3">

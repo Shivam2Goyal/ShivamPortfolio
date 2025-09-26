@@ -52,10 +52,9 @@ const Contact = () => {
           <div className="relative z-10 space-y-8">
             <div className="space-y-4">
               <p className="text-xl text-muted-foreground leading-relaxed">
-                I'm always excited to connect with fellow developers,
-                researchers, and creative minds. Whether you have a project
-                idea, want to collaborate, or just want to chat about technology
-                and innovation.
+                Always thrilled to connect with developers, researchers, and
+                creative folks. Got a project idea, want to collab, or just chat
+                tech and innovation? Let's talk!
               </p>
             </div>
 
@@ -66,42 +65,65 @@ const Contact = () => {
               </h3>
 
               <div className="flex flex-wrap justify-center gap-4">
-                {socialLinks.map((link, index) => (
-                  <Button
-                    key={link.label}
-                    variant="outline"
-                    size="sm"
-                    className="group border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105 font-playfair"
-                    asChild
-                  >
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
+                {socialLinks.map((link, index) => {
+                  // Assign glow color based on label (case-insensitive)
+                  let glow = "";
+                  switch (link.label.toLowerCase()) {
+                    case "leetcode":
+                      glow = "hover:shadow-[0_0_20px_4px_rgba(255,221,51,0.4)]"; // yellowish
+                      break;
+                    case "instagram":
+                      glow = "hover:shadow-[0_0_20px_4px_rgba(255,51,153,0.4)]"; // pinkish
+                      break;
+                    case "github":
+                      glow = "hover:shadow-[0_0_20px_4px_rgba(0,0,0,1)]"; // blackish
+                      break;
+                    case "linkedin":
+                      glow = "hover:shadow-[0_0_20px_4px_rgba(51,153,255,0.4)]"; // blueish
+                      break;
+                    case "codeforces":
+                      glow = "hover:shadow-[0_0_20px_4px_rgba(51,153,255,0.4)]"; // blueish
+                      break;
+                    default:
+                      glow = "";
+                  }
+                  return (
+                    <Button
+                      key={link.label}
+                      variant="outline"
+                      size="sm"
+                      className={`group border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105 font-playfair ${glow}`}
+                      asChild
                     >
-                      {typeof link.icon === "string" ? (
-                        <img
-                          src={link.icon}
-                          alt={link.label}
-                          className="h-4 w-4"
-                        />
-                      ) : (
-                        <link.icon
-                          className={`h-4 w-4 ${link.color} group-hover:scale-110 transition-transform duration-300`}
-                        />
-                      )}
-                      <span className="sm:inline">{link.label}</span>
-                    </a>
-                  </Button>
-                ))}
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        {typeof link.icon === "string" ? (
+                          <img
+                            src={link.icon}
+                            alt={link.label}
+                            className="h-4 w-4"
+                          />
+                        ) : (
+                          <link.icon
+                            className={`h-4 w-4 ${link.color} group-hover:scale-110 transition-transform duration-300`}
+                          />
+                        )}
+                        <span className="sm:inline">{link.label}</span>
+                      </a>
+                    </Button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Email */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-foreground font-playfair">
-                Or drop me an email
+                Or
               </h3>
 
               <Button
@@ -114,7 +136,7 @@ const Contact = () => {
                   className="flex items-center gap-2"
                 >
                   <Mail className="h-5 w-5" />
-                  b23cm1036@iitj.ac.in
+                  drop me an email
                 </a>
               </Button>
             </div>
