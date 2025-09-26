@@ -149,15 +149,6 @@ const Projects = () => {
               className="group bg-gradient-card border-border/50 backdrop-blur-sm card-hover overflow-hidden relative"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Highlight badge */}
-              <div className="absolute top-4 right-4 z-10">
-                <Badge
-                  variant="secondary"
-                  className="bg-primary/10 text-primary border-primary/20 text-xs"
-                >
-                  {project.highlight}
-                </Badge>
-              </div>
 
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between mb-2">

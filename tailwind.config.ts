@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        'playfair': ['Playfair Display', 'serif'],
+        'bree': ['Bree Serif', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

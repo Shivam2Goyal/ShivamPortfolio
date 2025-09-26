@@ -36,7 +36,7 @@ const Navbar = () => {
           {/* Logo */}
           <a
             href="#"
-            className="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300 font-playfair"
+            className="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300 font-bree"
           >
             Shivam Goyal
           </a>
@@ -47,7 +47,7 @@ const Navbar = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="relative py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair smooth-transition"
+                className="relative py-2 transition-all duration-500 text-muted-foreground hover:text-foreground font-bree smooth-transition"
                 onClick={(e) => {
                   e.preventDefault();
                   const element = document.querySelector(item.href);
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="block py-2 transition-colors duration-300 text-muted-foreground hover:text-foreground font-playfair"
+                  className="block py-2 transition-all duration-500 text-muted-foreground hover:text-foreground font-bree"
                   onClick={(e) => {
                     e.preventDefault();
                     const element = document.querySelector(item.href);

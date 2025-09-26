@@ -44,9 +44,6 @@ const Experience = () => {
                   </div>
                 </div>
 
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
-                  Team Project
-                </Badge>
               </div>
 
               {/* Achievements */}

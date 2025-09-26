@@ -121,7 +121,7 @@ const Skills = () => {
           <div className="flex justify-center">
             <Card
               key={currentCategory.title}
-              className="p-6 bg-gradient-card border-border/50 backdrop-blur-sm card-hover group w-full max-w-md"
+              className="p-8 bg-gradient-card border-border/50 backdrop-blur-sm card-hover group w-full max-w-4xl"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div

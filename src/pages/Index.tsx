@@ -6,11 +6,14 @@ import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import CoursesAchievements from "@/components/CoursesAchievements";
 import Footer from "@/components/Footer";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background font-playfair">
-      <Navbar />
+    <div className="min-h-screen bg-background font-bree relative">
+      <AnimatedBackground />
+      <div className="relative z-10">
+        <Navbar />
       <main>
         <About />
         <Skills />
@@ -44,6 +47,7 @@ const Index = () => {
         </section>
       </main>
       <Footer />
+      </div>
     </div>
   );
 };
