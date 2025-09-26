@@ -30,33 +30,38 @@ const About = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Profile Image */}
-          <div className="lg:col-span-1 flex justify-center lg:justify-start">
-            <div className="relative lg:ml-20">
+          <div className="lg:col-span-1 flex justify-center lg:justify-end lg:pr-8">
+            <div className="relative">
               {/* Main profile card */}
-              <div className="bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md rounded-3xl p-6 border border-border/50 shadow-2xl">
+              <div className="bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-md rounded-3xl p-8 border border-primary/30 shadow-2xl shadow-cyan-400/20 relative overflow-hidden">
+                {/* Fluorescent glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-emerald-400/10 rounded-3xl" />
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl" />
+                <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-400/15 rounded-full blur-3xl" />
+                
                 {/* Profile Image */}
-                <div className="w-80 h-96 bg-muted/50 rounded-2xl mb-6 overflow-hidden border-2 border-primary/20 relative">
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                    <img 
-                      src="/me.jpg" 
-                      alt="Shivam's Profile" 
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        e.currentTarget.parentElement.innerHTML = '<span class="text-6xl">👤</span>';
-                      }}
-                    />
-                  </div>
+                <div className="relative z-10 w-80 h-96 bg-muted/50 rounded-2xl mb-6 overflow-hidden border-2 border-cyan-400/40 shadow-lg shadow-cyan-400/30">
+                  <img 
+                    src="/me.jpg" 
+                    alt="Shivam's Profile" 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-muted-foreground"><span class="text-6xl">👤</span></div>';
+                    }}
+                  />
+                  {/* Subtle overlay for better integration */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 via-transparent to-transparent pointer-events-none" />
                 </div>
 
                 {/* Social Links */}
-                <div className="flex justify-center gap-4">
+                <div className="relative z-10 flex justify-center gap-4">
                   {socialLinks.map((link) => (
                     <Button
                       key={link.label}
                       variant="outline"
                       size="sm"
-                      className="w-12 h-12 rounded-xl border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 bg-background/50 backdrop-blur-sm"
+                      className="w-12 h-12 rounded-xl border-cyan-400/40 hover:border-cyan-400 hover:bg-cyan-400/20 hover:shadow-lg hover:shadow-cyan-400/30 transition-all duration-300 bg-background/60 backdrop-blur-sm"
                       asChild
                     >
                       <a
@@ -65,7 +70,7 @@ const About = () => {
                         rel="noopener noreferrer"
                         className="flex items-center justify-center"
                       >
-                        <link.icon className="h-5 w-5 text-primary" />
+                        <link.icon className="h-5 w-5 text-cyan-400 group-hover:text-cyan-300" />
                       </a>
                     </Button>
                   ))}
@@ -75,7 +80,7 @@ const About = () => {
           </div>
 
           {/* About Content */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6 lg:pl-8">
             <div>
               <h3 className="text-4xl md:text-5xl font-bold mb-4">
                 Hi, <span className="text-cyan-400">Shivam</span> Here.
