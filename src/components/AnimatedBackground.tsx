@@ -25,20 +25,5 @@ const AnimatedBackground = () => {
       <div className="absolute bottom-32 left-1/4 w-48 h-48 bg-teal-300/15 rounded-full blur-3xl animate-float opacity-60 shadow-2xl shadow-teal-300/10" style={{ animationDelay: '4s' }} />
       <div className="absolute bottom-20 right-1/3 w-36 h-36 bg-cyan-300/18 rounded-full blur-2xl animate-float opacity-50 shadow-2xl shadow-cyan-300/13" style={{ animationDelay: '1s' }} />
       <div className="absolute top-1/2 left-1/2 w-44 h-44 bg-emerald-400/16 rounded-full blur-3xl animate-float opacity-65 shadow-2xl shadow-emerald-400/11" style={{ animationDelay: '3s' }} />
-      
-      {/* Dynamic gradient overlays with fluorescent effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/8 via-transparent to-emerald-400/8 opacity-70" />
-      <div className="absolute inset-0 bg-gradient-to-tl from-teal-300/6 via-transparent to-cyan-300/6 opacity-50" />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/4 to-transparent opacity-60" />
-      
-      {/* Animated energy waves */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-pulse" />
-        <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-400/25 to-transparent animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-300/20 to-transparent animate-pulse" style={{ animationDelay: '2s' }} />
-      </div>
-    </div>
-  );
-};
 
 export default AnimatedBackground;
