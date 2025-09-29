@@ -42,7 +42,7 @@ const About = () => {
                 {/* Profile Image */}
                 <div className="relative z-10 w-80 h-96 bg-muted/50 rounded-2xl mb-6 overflow-hidden border-2 border-cyan-400/40 shadow-lg shadow-cyan-400/30">
                   <img
-                    src="public/icons/me.jpeg"
+                    src="/icons/me.jpeg"
                     alt="Shivam's Profile"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
