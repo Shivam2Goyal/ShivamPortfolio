@@ -5,7 +5,7 @@ import { Github, Linkedin, Instagram, Mail, Code } from "lucide-react";
 const Contact = () => {
   const socialLinks = [
     {
-      icon: "public/icons/linkedin.svg",
+      icon: "/icons/linkedin.svg",
       href: "https://www.linkedin.com/in/shivam-goyal-/",
       label: "LinkedIn",
       color: "text-blue-500",
@@ -23,13 +23,13 @@ const Contact = () => {
       color: "text-pink-500",
     },
     {
-      icon: "public/icons/codeforces.svg",
+      icon: "/icons/codeforces.svg",
       href: "https://codeforces.com/profile/_sg_",
       label: "Codeforces",
       color: "text-blue-400",
     },
     {
-      icon: "public/icons/leetcode.svg",
+      icon: "/icons/leetcode.svg",
       href: "https://leetcode.com/u/_sg_-/",
       label: "LeetCode",
       color: "text-yellow-500",
