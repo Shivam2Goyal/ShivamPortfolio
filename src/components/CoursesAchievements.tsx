@@ -8,15 +8,15 @@ const CoursesAchievements = () => {
     "Principles of Computer Systems",
     "Pattern Recognition & ML",
     "Probability & Statistics",
-    "Signals and Systems",
+    "Artificial Intelligence",
   ];
 
   // Add your ongoing courses below
   const ongoingCourses = [
-    "Optimization for Machine Learning",
-    "Artificial Intelligence",
-    "Data Engineering",
-    "Design & Analysis of Algorithms",
+    "Computer Vision",
+    "Natural Language Understanding",
+    "Deep Learning",
+    "Data Visualisation",
   ];
 
   const achievements = [
