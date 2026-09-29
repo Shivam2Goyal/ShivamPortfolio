@@ -1,108 +1,113 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Home, User, Image, Newspaper, Menu, X } from "lucide-react";
+
+// Top-level pages only. Within a page (e.g. About), section navigation is
+// handled by that page's own local nav (see AboutSidebar.tsx), not here.
+const navItems = [
+  { href: "/about", label: "About", icon: User },
+  { href: "/gallery", label: "Gallery", icon: Image },
+  { href: "/blog", label: "Blog", icon: Newspaper },
+];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { href: "#about", label: "About Me" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
-  ];
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const goHome = (e: React.MouseEvent) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a
-            href="#"
-            className="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300 font-bree"
-          >
-            Shivam Goyal
-          </a>
+    <nav className="fixed top-4 left-1/2 z-50 w-fit max-w-[calc(100%-2rem)] -translate-x-1/2">
+      <div
+        className={`flex items-center gap-1 rounded-full border border-border px-2 py-1.5 transition-colors duration-300 ${
+          isScrolled ? "bg-background/70 backdrop-blur-md" : "bg-background/40 backdrop-blur-sm"
+        }`}
+      >
+        <Link
+          to="/"
+          onClick={goHome}
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+            location.pathname === "/"
+              ? "border-primary text-foreground"
+              : "border-border text-foreground hover:border-primary"
+          }`}
+          aria-label="Home"
+        >
+          <Home className="h-3.5 w-3.5" />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center space-x-8 flex-1">
-            {navItems.map((item) => (
-              <a
+        <span className="hidden h-5 w-px shrink-0 bg-border md:block" aria-hidden="true" />
+
+        <div className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => {
+            const isActive =
+              location.pathname === item.href || location.pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
                 key={item.href}
-                href={item.href}
-                className="relative py-2 transition-all duration-500 text-muted-foreground hover:text-foreground font-bree smooth-transition group"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.querySelector(item.href);
-                  element?.scrollIntoView({ behavior: "smooth" });
-                }}
+                to={item.href}
+                className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition-colors duration-300 ${
+                  isActive
+                    ? "border-border bg-secondary text-foreground"
+                    : "border-transparent text-muted-foreground hover:bg-secondary hover:text-foreground"
+                }`}
               >
+                <item.icon className="h-3 w-3" />
                 {item.label}
-                {/* Enhanced underline effect */}
-                <span className="pointer-events-none absolute left-1/2 bottom-0 w-3/4 h-1.5 -translate-x-1/2 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center rounded-full bg-gradient-to-r from-cyan-400 via-cyan-400 to-cyan-500 blur-sm shadow-lg opacity-80 animate-navbar-glow"></span>
-                <span className="pointer-events-none absolute left-1/2 bottom-0 w-1/2 h-0.5 -translate-x-1/2 scale-x-0 group-hover:scale-x-100 transition-transform duration-600 origin-center rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-50"></span>
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border">
-            <div className="px-6 py-4 space-y-3">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="block py-2 transition-all duration-500 text-muted-foreground hover:text-foreground font-bree group relative"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector(item.href);
-                    element?.scrollIntoView({ behavior: "smooth" });
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  {item.label}
-                  {/* Enhanced underline effect for mobile */}
-                  <span className="pointer-events-none absolute left-1/2 bottom-0 w-3/4 h-1.5 -translate-x-1/2 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center rounded-full bg-gradient-to-r from-yellow-400 via-cyan-400 to-pink-500 blur-sm shadow-lg opacity-80 animate-navbar-glow"></span>
-                  <span className="pointer-events-none absolute left-1/2 bottom-0 w-1/2 h-0.5 -translate-x-1/2 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-center rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-100"></span>
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="ml-auto rounded-full md:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className="absolute left-1/2 top-full mt-2 w-56 -translate-x-1/2 rounded-2xl border border-border bg-background/80 p-2 backdrop-blur-md md:hidden">
+          <Link
+            to="/"
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-muted-foreground transition-colors duration-300 hover:bg-secondary hover:text-foreground"
+          >
+            <Home className="h-4 w-4" />
+            Home
+          </Link>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-muted-foreground transition-colors duration-300 hover:bg-secondary hover:text-foreground"
+            >
+              <item.icon className="h-4 w-4" />
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };

@@ -1,164 +1,40 @@
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Code,
-  Brain,
-  Globe,
-  Wrench,
-  Database,
-  User,
-  Filter,
-} from "lucide-react";
-
 const skillCategories = [
   {
     title: "Programming Languages",
-    icon: Code,
-    skills: ["C/C++", "Python", "JavaScript", "SQL"],
-    color: "primary",
+    skills: ["Python", "C/C++", "SQL"],
   },
   {
-    title: "Technical Skills",
-    icon: Brain,
-    skills: [
-      "Machine Learning",
-      "Data Analysis",
-      "Computer Vision",
-      "Deep Learning",
-    ],
-    color: "accent",
+    title: "AI & Machine Learning",
+    skills: ["PyTorch", "OpenCV", "Scikit-learn", "LangChain", "RAG", "MCP", "NumPy", "Pandas"],
   },
   {
-    title: "Tools & Frameworks",
-    icon: Wrench,
-    skills: [
-      "Git",
-      "GitHub",
-      "Linux",
-      "Jupyter",
-      "LaTeX",
-      "SolidWorks",
-      "Tableau",
-    ],
-    color: "primary",
+    title: "Software Development",
+    skills: ["React", "Next.js", "FastAPI", "Django", "REST APIs", "Microservices"],
   },
   {
-    title: "Libraries & Platforms",
-    icon: Database,
-    skills: [
-      "NumPy",
-      "Pandas",
-      "Seaborn",
-      "Matplotlib",
-      "PyTorch",
-      "Scikit-learn",
-      "LangChain",
-      "OpenCV",
-      "Flask",
-      "ReactJS",
-    ],
-    color: "accent",
+    title: "Tools & Cloud",
+    skills: ["Git", "GitHub", "Docker", "AWS EC2", "Vector Databases"],
   },
   {
-    title: "Soft Skills",
-    icon: Globe,
-    skills: [
-      "Leadership",
-      "Team Collaboration",
-      "Problem Solving",
-      "Communication",
-      "Project Management",
-    ],
-    color: "primary",
+    title: "Design & Visualization",
+    skills: ["SolidWorks", "Fusion 360", "Ultimaker CURA", "Tableau", "Matplotlib", "Seaborn"],
   },
 ];
 
 const Skills = () => {
-  const [selectedCategory, setSelectedCategory] = useState(
-    skillCategories[0].title
-  );
-
-  const currentCategory = skillCategories.find(
-    (cat) => cat.title === selectedCategory
-  );
-
   return (
-    <section
-      id="skills"
-      className="py-20 px-6 text-[1.15rem] md:text-[1.25rem]"
-    >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gradient animate-fade-in font-playfair">
-          <span className="text-4xl md:text-5xl">Skills</span>
-        </h2>
+    <section id="skills" className="scroll-mt-32">
+      <h2 className="mb-8 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+        Technical Skills
+      </h2>
 
-        {/* Category Navbar */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {skillCategories.map((category) => (
-            <Button
-              key={category.title}
-              variant={
-                selectedCategory === category.title ? "default" : "outline"
-              }
-              size="sm"
-              onClick={() => setSelectedCategory(category.title)}
-              className={`transition-all duration-300 font-playfair ${
-                selectedCategory === category.title
-                  ? "bg-primary text-primary-foreground"
-                  : "border-primary/30 hover:border-primary hover:bg-primary/10"
-              }`}
-            >
-              {category.title}
-            </Button>
-          ))}
-        </div>
-
-        {/* Only show the selected category card */}
-        {currentCategory && (
-          <div className="flex justify-center">
-            <Card
-              key={currentCategory.title}
-              className="p-8 bg-gradient-card border-border/50 backdrop-blur-sm card-hover group w-full max-w-4xl"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div
-                  className={`p-2 rounded-lg bg-${currentCategory.color}/10 group-hover:bg-${currentCategory.color}/20 transition-colors duration-300`}
-                >
-                  <currentCategory.icon
-                    className={`h-5 w-5 text-${currentCategory.color}`}
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300 font-playfair">
-                  <span className="text-2xl md:text-3xl">
-                    {currentCategory.title}
-                  </span>
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {currentCategory.skills.map((skill, skillIndex) => (
-                  <Badge
-                    key={skill}
-                    variant="outline"
-                    className={`
-                      border-${currentCategory.color}/30 text-${currentCategory.color}
-                      hover:bg-${currentCategory.color}/10 hover:border-${currentCategory.color}
-                      transition-all duration-300 cursor-default text-base md:text-lg
-                      group-hover:scale-105
-                    `}
-                    style={{
-                      animationDelay: `${skillIndex * 0.05}s`,
-                    }}
-                  >
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
+      <div className="space-y-6">
+        {skillCategories.map((category) => (
+          <div key={category.title}>
+            <h3 className="font-bold text-foreground">{category.title}</h3>
+            <p className="mt-1 text-muted-foreground">{category.skills.join(", ")}</p>
           </div>
-        )}
+        ))}
       </div>
     </section>
   );

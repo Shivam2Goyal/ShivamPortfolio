@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
+import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -14,7 +16,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        'bree': ['Bree Serif', 'serif'],
+        // Single typeface for the whole site — Inter at regular weight for body
+        // copy, and at heavy weight (font-bold/extrabold/black) for headings.
+        // Matches the reference: one grotesque sans, no separate serif/display face.
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        display: ['Inter', ...defaultTheme.fontFamily.sans],
+        // Legacy class names already used across existing components — aliased to
+        // Inter so those elements render correctly without requiring component
+        // edits in this layer. `bree`/`bree-serif` previously pointed at Bree
+        // Serif; `playfair` previously resolved to nothing.
+        'bree': ['Inter', ...defaultTheme.fontFamily.sans],
+        'bree-serif': ['Inter', ...defaultTheme.fontFamily.sans],
+        'playfair': ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -94,6 +107,11 @@ export default {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
+        "fade-in-blur": {
+          "0%": { opacity: "0", filter: "blur(14px)" },
+          "60%": { opacity: "1", filter: "blur(4px)" },
+          "100%": { opacity: "1", filter: "blur(0px)" },
+        },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
@@ -120,11 +138,12 @@ export default {
         "slide-in-right": "slide-in-right 0.8s ease-out",
         "slide-in-left": "slide-in-left 0.8s ease-out",
         "scale-in": "scale-in 0.4s ease-out",
+        "fade-in-blur": "fade-in-blur 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) both",
         "float": "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "fluorescent-pulse": "fluorescent-pulse 3s ease-in-out infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), typography],
 } satisfies Config;

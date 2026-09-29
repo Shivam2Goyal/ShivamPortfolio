@@ -1,24 +1,63 @@
+import { useEffect, useRef } from "react";
+
+// A soft radial glow that follows the cursor, painted only on the page
+// background layer (never on text/cards/components — those all render in
+// normal page content, stacked above this fixed layer). Disabled on
+// touch devices (no real cursor) and when the user prefers reduced motion.
 const AnimatedBackground = () => {
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!canHover || prefersReducedMotion) return;
+
+    const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const current = { ...target };
+    // How much of the remaining distance to close each frame — lower is
+    // more fluid/trailing, higher is snappier/more rigid.
+    const ease = 0.08;
+
+    const handleMove = (e: PointerEvent) => {
+      target.x = e.clientX;
+      target.y = e.clientY;
+    };
+    window.addEventListener("pointermove", handleMove);
+
+    let frame = requestAnimationFrame(function tick() {
+      current.x += (target.x - current.x) * ease;
+      current.y += (target.y - current.y) * ease;
+
+      const el = glowRef.current;
+      if (el) {
+        el.style.setProperty("--glow-x", `${current.x}px`);
+        el.style.setProperty("--glow-y", `${current.y}px`);
+      }
+
+      frame = requestAnimationFrame(tick);
+    });
+
+    return () => {
+      window.removeEventListener("pointermove", handleMove);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Fluorescent glowing particles */}
-      <div className="absolute top-32 left-16 w-4 h-4 bg-cyan-400/70 rounded-full blur-sm animate-float opacity-90 shadow-lg shadow-cyan-400/50" />
-      <div className="absolute top-64 right-24 w-3 h-3 bg-emerald-400/80 rounded-full blur-sm animate-float opacity-85 shadow-lg shadow-emerald-400/60" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-48 left-32 w-5 h-5 bg-cyan-300/60 rounded-full blur-sm animate-float opacity-80 shadow-xl shadow-cyan-300/40" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-72 right-16 w-4 h-4 bg-teal-300/70 rounded-full blur-sm animate-float opacity-90 shadow-lg shadow-teal-300/50" style={{ animationDelay: '3s' }} />
-      <div className="absolute top-96 left-64 w-3 h-3 bg-cyan-500/80 rounded-full blur-sm animate-float opacity-85 shadow-lg shadow-cyan-500/60" style={{ animationDelay: '4s' }} />
-      <div className="absolute top-48 right-48 w-4 h-4 bg-blue-400/65 rounded-full blur-sm animate-float opacity-95 shadow-xl shadow-blue-400/45" style={{ animationDelay: '5s' }} />
-      <div className="absolute bottom-32 left-96 w-5 h-5 bg-cyan-400/55 rounded-full blur-sm animate-float opacity-85 shadow-lg shadow-cyan-400/35" style={{ animationDelay: '6s' }} />
-      <div className="absolute top-80 right-72 w-3 h-3 bg-emerald-400/75 rounded-full blur-sm animate-float opacity-90 shadow-lg shadow-emerald-400/55" style={{ animationDelay: '7s' }} />
-      <div className="absolute bottom-96 right-32 w-4 h-4 bg-teal-300/60 rounded-full blur-sm animate-float opacity-80 shadow-xl shadow-teal-300/40" style={{ animationDelay: '8s' }} />
-      <div className="absolute top-40 left-80 w-3 h-3 bg-cyan-300/80 rounded-full blur-sm animate-float opacity-90 shadow-lg shadow-cyan-300/60" style={{ animationDelay: '9s' }} />
-      
-      {/* Medium fluorescent orbs */}
-      <div className="absolute top-20 left-40 w-8 h-8 bg-cyan-400/40 rounded-full blur-md animate-float opacity-70 shadow-2xl shadow-cyan-400/30" style={{ animationDelay: '1.5s' }} />
-      <div className="absolute bottom-40 right-60 w-10 h-10 bg-emerald-400/35 rounded-full blur-md animate-float opacity-65 shadow-2xl shadow-emerald-400/25" style={{ animationDelay: '3.5s' }} />
-      <div className="absolute top-60 right-40 w-9 h-9 bg-teal-300/45 rounded-full blur-md animate-float opacity-75 shadow-2xl shadow-teal-300/35" style={{ animationDelay: '5.5s' }} />
-      <div className="absolute bottom-60 left-48 w-8 h-8 bg-cyan-300/40 rounded-full blur-md animate-float opacity-60 shadow-2xl shadow-cyan-300/30" style={{ animationDelay: '7.5s' }} />
-    </div>
+    <div
+      ref={glowRef}
+      aria-hidden="true"
+      className="fixed inset-0 z-0 bg-background"
+      style={
+        {
+          "--glow-x": "50%",
+          "--glow-y": "35%",
+          backgroundImage:
+            "radial-gradient(1100px circle at var(--glow-x) var(--glow-y), hsl(var(--primary) / 0.12) 0%, hsl(var(--primary) / 0.06) 35%, transparent 75%)",
+        } as React.CSSProperties
+      }
+    />
   );
 };
+
 export default AnimatedBackground;

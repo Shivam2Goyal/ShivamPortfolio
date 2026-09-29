@@ -1,241 +1,79 @@
-import { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Github,
-  ExternalLink,
-  Calendar,
-  TrendingUp,
-  Filter,
-} from "lucide-react";
+const projects = [
+  {
+    title: "Agentic RAG over MCP",
+    period: "Feb 2026 – Mar 2026",
+    description:
+      "Hybrid retrieval system (dense + BM25, RRF-fused in Qdrant, cross-encoder reranking) exposed as 10 MCP tools with an agentic corpus-to-web cascade, replacing a hardcoded confidence cutoff with a threshold fitted on 70 labelled queries (Youden's J, ROC AUC) plus per-sentence citation verification.",
+    technologies: ["Python", "MCP", "Qdrant", "Cross-Encoder Reranking", "FastAPI", "React", "Docker", "SearxNG"],
+    metrics: "Benchmarked 5 configurations over 40 queries — recall@1 0.98, nDCG@10 0.99",
+    github: "https://github.com/Shivam2Goyal/MCP-powered-Agentic-RAG.git",
+  },
+  {
+    title: "Unsupervised Image Segmentation Pipeline",
+    period: "Sep 2025 – Nov 2025",
+    description:
+      "Unsupervised image segmentation using LAB color space and 24-point LBP texture features, comparing standard and Bayesian GMMs (5×5 Gaussian blur, LAB conversion) for automatic component selection and reduced over-segmentation.",
+    technologies: ["Python", "OpenCV", "Scikit-learn", "NumPy", "Matplotlib"],
+    metrics: "91.7% Jaccard similarity with 7-component full-covariance clustering",
+    github: "https://github.com/Shivam2Goyal/GMM-Segmentation.git",
+  },
+  {
+    title: "Multimodal Emotion Analyser",
+    period: "Feb 2025 – Mar 2025",
+    description:
+      "Real-time facial emotion recognition (CNN on FER-2013, deployed with OpenCV and Haar Cascade) paired with a Bi-LSTM text emotion classifier using 300d GloVe embeddings across 7 emotion classes.",
+    technologies: ["Python", "CNN", "BiLSTM", "OpenCV", "Streamlit", "NLP", "GloVe"],
+    metrics: "68% val. accuracy (facial), 63% val. accuracy (text)",
+    github: "https://github.com/Shivam2Goyal/SentimentSphere.git",
+  },
+  {
+    title: "HyperTrie",
+    period: "Nov 2024 – Dec 2024",
+    description:
+      "Privacy-first Chrome extension (MV3) for instant top-k prefix search over browsing history, using a path-compressed radix trie in C++/WebAssembly with an append-only IndexedDB log and rebuildable trie index.",
+    technologies: ["C++", "WebAssembly", "Emscripten", "JavaScript", "React", "IndexedDB", "Chrome Extensions (MV3)"],
+    metrics: "4.02× fewer URL characters stored than a flat list, validated by 139 tests",
+    github: "https://github.com/Shivam2Goyal/HyperTrie.git",
+  },
+];
 
 const Projects = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All Projects");
-  const [showAll, setShowAll] = useState(false);
-
-  const projects = [
-    {
-      title: "SentimentSphere",
-      period: "Feb 2025 – Mar 2025",
-      description:
-        "Multimodal emotion recognition web app combining CNN-based facial detection with BiLSTM text classification for real-time emotion analysis.",
-      technologies: ["TensorFlow", "Haar Cascade", "OpenCV", "BiLSTM"],
-      metrics: "68% facial accuracy, 65% text accuracy",
-      github: "https://github.com/Shivam2Goyal/SentimentSphere.git",
-      category: "Machine Learning",
-    },
-    {
-      title: "GMM Image Segmentor",
-      period: "Apr 2025 – May 2025",
-      description:
-        "Advanced image segmentation using Gaussian Mixture Models with EM algorithm and Dirichlet Process, incorporating spatial and LBP features.",
-      technologies: ["Python", "NumPy", "OpenCV", "Scikit-image", "Matplotlib"],
-      metrics: "Jaccard coefficient up to 0.917",
-      github: "https://github.com/Shivam2Goyal/GMM-Segmentation.git",
-      category: "Machine Learning",
-    },
-    {
-      title: "ThreatHawk",
-      period: "Feb 2025 – Apr 2025",
-      description:
-        "Advanced ML-based Network Intrusion Detection System using ensemble methods to detect malicious network activity with high precision.",
-      technologies: ["Scikit-learn", "XGBoost", "Random Forest", "SVM", "k-NN"],
-      metrics: ">90% accuracy, AUC >0.90",
-      github: "https://github.com/Shivam2Goyal/Network-Intrusion-Detector.git",
-      category: "Coursework",
-    },
-    {
-      title: "HyperTrie",
-      period: "Nov 2024 – Dec 2024",
-      description:
-        "Efficient browser history manager using Trie data structure with Chrome extension for O(L) time complexity URL search and retrieval.",
-      technologies: ["C++", "Python", "Flask", "JavaScript"],
-      metrics: "95% faster than list-based search",
-      github: "https://github.com/Shivam2Goyal/HyperTrie.git",
-      category: "Algorithms",
-    },
-    {
-      title: "Project Raseed",
-      period: "Jul 2025 – Present",
-      description:
-        "AI-first receipt intelligence engine combining Google Wallet integration with Gemini AI for smart expense tracking and financial insights.",
-      technologies: [
-        "Gemini AI",
-        "Google Wallet API",
-        "Python",
-        "React",
-        "Firebase",
-      ],
-      status: "In Development",
-      highlight: "AI-First Intelligence",
-      category: "Machine Learning",
-    },
-  ];
-
-  const categories = [
-    "All Projects",
-    "Machine Learning",
-    "Algorithms",
-    "Frontend",
-    "Backend",
-    "Full Stack",
-    "Coursework",
-  ];
-
-  const filteredProjects =
-    selectedCategory === "All Projects"
-      ? projects
-      : projects.filter((project) => project.category === selectedCategory);
-
-  const displayedProjects = showAll
-    ? filteredProjects
-    : filteredProjects.slice(0, 3);
-
   return (
-    <section id="projects" className="py-20 px-6 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gradient animate-fade-in font-playfair">
-          Projects
-        </h2>
+    <section id="projects" className="scroll-mt-32">
+      <h2 className="mb-8 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+        Projects
+      </h2>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className={`transition-all duration-300 font-playfair ${
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "border-primary/30 hover:border-primary hover:bg-primary/10"
-              }`}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
+      <div className="space-y-12">
+        {projects.map((project) => (
+          <div key={project.title}>
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+              <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
+              <p className="whitespace-nowrap text-sm text-muted-foreground">{project.period}</p>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedProjects.map((project, index) => (
-            <Card
-              key={project.title}
-              className="group bg-gradient-card border-border/50 backdrop-blur-sm card-hover overflow-hidden relative"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardHeader className="pb-4">
-                <div className="flex items-start justify-between mb-2">
-                  <CardTitle className="text-xl font-bold text-primary group-hover:text-primary-glow transition-colors duration-300 font-playfair">
-                    {project.title}
-                  </CardTitle>
-                </div>
+            <p className="mt-2 text-foreground">{project.description}</p>
 
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                  <Calendar className="h-4 w-4" />
-                  <span>{project.period}</span>
-                </div>
+            {project.metrics && (
+              <p className="mt-2 text-sm text-muted-foreground">{project.metrics}</p>
+            )}
 
-                <CardDescription className="text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-relaxed">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {project.technologies.join(", ")}
+            </p>
 
-              <CardContent className="pt-0 space-y-4">
-                {/* Metrics */}
-                {(project.metrics || project.status) && (
-                  <div className="flex items-center gap-2 p-3 bg-accent/10 rounded-lg">
-                    <TrendingUp className="h-4 w-4 text-accent" />
-                    <span className="text-sm font-medium text-accent">
-                      {project.metrics || project.status}
-                    </span>
-                  </div>
-                )}
-
-                {/* Technologies */}
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-muted-foreground">
-                    Technologies:
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    {project.technologies.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="outline"
-                        className="text-xs border-primary/30 text-primary hover:bg-primary/10 transition-colors duration-300"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Action buttons */}
-                <div className="flex gap-2 pt-4">
-                  {project.github && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
-                      asChild
-                    >
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="h-4 w-4 mr-2" />
-                        Code
-                      </a>
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-
-              {/* Hover effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            </Card>
-          ))}
-        </div>
-
-        {/* Show More/Less Button */}
-        {filteredProjects.length > 3 && (
-          <div className="text-center mt-8">
-            <Button
-              variant="outline"
-              onClick={() => setShowAll(!showAll)}
-              className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 font-playfair"
-            >
-              {showAll ? "Show Less" : `Show More`}
-            </Button>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-block text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground"
+              >
+                View code →
+              </a>
+            )}
           </div>
-        )}
-
-        {/* View GitHub */}
-        <div className="text-center mt-8">
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-primary/30 hover:border-primary hover:bg-primary/10 hover:scale-105 transition-all duration-300 font-playfair"
-            asChild
-          >
-            <a
-              href="https://github.com/Shivam2Goyal"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="h-5 w-5 mr-2" />
-              View All Projects
-            </a>
-          </Button>
-        </div>
+        ))}
       </div>
     </section>
   );

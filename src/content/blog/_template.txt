@@ -1,0 +1,14 @@
+Template for a new blog post — copy this into a new file in this folder named
+something like my-post-title.md (the filename becomes the URL slug, so use
+lowercase and hyphens). This file itself is .txt, not .md, so it's ignored by
+the blog loader and never shows up as a post.
+
+---
+title: "Post title"
+date: "2026-01-15"
+description: "One sentence shown in the post list."
+tags: tag-one, tag-two
+---
+
+Post body goes here, in Markdown. Headings, **bold**, _italic_, [links](https://example.com),
+lists, and code blocks are all supported.

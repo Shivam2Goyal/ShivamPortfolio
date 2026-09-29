@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Personal/working files not meant for the public repo
+resume.pdf
+SDE_Resume.pdf
+reference/
+CLAUDE.md
+PORTFOLIO_REDESIGN_REFERENCE.md
